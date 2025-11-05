@@ -27,7 +27,13 @@ SECRET_KEY = 'django-insecure-hpn&$%*u2of=%yvyh_2z_-0lu&h-24qr=97=uw1d&!8x!axxb&
 DEBUG = os.getenv('DJANGO_ENV', 'development').lower() == "development"
 
 ALLOWED_HOSTS = [
-    "localhost"
+    "localhost",
+    'https://via.placeholder.com/148x148',
+   'https://via.placeholder.com/600x430',
+   'https://via.placeholder.com/600x500',
+   'https://via.placeholder.com/1920x1080',
+   'https://via.placeholder.com/1920x1100',
+
 ]
 
 
@@ -57,7 +63,7 @@ ROOT_URLCONF = 'noja.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'static/home/homepage/')],
+        'DIRS': [os.path.join(BASE_DIR, 'static/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
