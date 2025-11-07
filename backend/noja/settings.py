@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +84,13 @@ WSGI_APPLICATION = 'noja.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'noja_db',
+        'USER': 'priveiro',
+        'PASSWORD': '21Gramos',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+
     }
 }
 
@@ -134,3 +140,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Custom user model
+AUTH_USER_MODEL = 'accounts.CustomUser'
