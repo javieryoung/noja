@@ -455,24 +455,9 @@
         <div class="row row-cols-md-1 justify-content-center">
             <div class="col-xl-9 overflow-hidden">
                 <!-- start contact form -->
-                <form action="{% url 'signup_view' %}" method="post" class="row contact-form-style-02"
+                <form action="/home/homepage/" method="post" class="row contact-form-style-02"
                     data-anime='{ "translateX": [0, 0], "opacity": [0,1], "duration": 600, "delay": 250, "staggervalue": 300, "easing": "easeOutQuad" }'>
                     {% csrf_token %}
-
-                    {% if form.errors %}
-                    <div class="col-12 mb-20px">
-                        <ul class="text-danger">
-                            {% for field in form %}
-                            {% for error in field.errors %}
-                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
-                            {% endfor %}
-                            {% endfor %}
-                            {% for error in form.non_field_errors %}
-                            <li><strong>Error:</strong> {{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %}
 
                     <div class="col-md-6 mb-30px">
                         <input class="form-control required" type="text" name="nombre" placeholder="Tu nombre*" />
@@ -486,7 +471,23 @@
                     <div class="col-md-6 mb-30px">
                         <input class="form-control" type="tel" name="telefono" placeholder="Tu teléfono" />
                     </div>
-
+                    {% if form.errors %}
+                    <ul class="errorlist danger-box mb-20px p-15px bg-light-red text-red border-radius-5px">
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% if success_message %}
+                    <div class="alert alert-success" role="alert">
+                        {{ success_message }}
+                    </div>
+                    {% endif %}
 
                     <div class="col-xl-6 col-md-7 last-paragraph-no-margin">
                         <p class="text-center text-md-start fs-15 lh-28">Nos comprometemos a proteger tu privacidad.
@@ -494,7 +495,7 @@
                     </div>
                     <div class="col-xl-6 col-md-5 text-center text-md-end sm-mt-20px">
                         <input type="hidden" name="redirect" value="">
-                        <button class="btn btn-gradient-emerald-blue-emerald-green btn-small btn-round-edge submit"
+                        <button class="btn btn-gradient-emerald-blue-emerald-green btn-small btn-round-edge"
                             type="submit">Registrarse</button>
                     </div>
                     <div class="col-12">
@@ -508,81 +509,6 @@
 </section>
 <!-- end section -->
 
-<!-- start subscription popup -->
-<div id="subscribe-popup" class="mfp-hide subscribe-popup">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-10 col-md-12 bg-white">
-                <div class="box-shadow-quadruple-large">
-                    <div class="col-lg-12 cover-background md-h-400px xs-h-300px"
-                        style="background-image:url('https://via.placeholder.com/800x770');"></div>
-                    <div class="col-lg-12 newsletter-popup p-8 pt-10 pb-10 lg-p-5 md-p-6 xs-p-8 position-relative">
-                        <h4 class="d-inline-block alt-font ls-minus-1px fw-700 text-dark-gray mb-15px">Subscribe to the
-                            latest updates!</h4>
-                        <p>Subscribe to our newsletters and get the latest business updates.</p>
-                        <div class="d-inline-block w-100 newsletter-style-05 position-relative mb-20px">
-                              <div class="col-xl-9 overflow-hidden">
-                <!-- start contact form -->
-                <form action="{% url 'signup_view' %}" method="post" class="row contact-form-style-02">
-                   
-                    {% csrf_token %}
-
-                    {% if form.errors %}
-                    <div class="col-12 mb-20px">
-                        <ul class="text-danger">
-                            {% for field in form %}
-                            {% for error in field.errors %}
-                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
-                            {% endfor %}
-                            {% endfor %}
-                            {% for error in form.non_field_errors %}
-                            <li><strong>Error:</strong> {{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %}
-
-                    <div class="col-md-6 mb-30px">
-                        <input class="form-control required" type="text" name="nombre" placeholder="Tu nombre*" />
-                    </div>
-                    <div class="col-md-6 mb-30px">
-                        <input class="form-control required" type="email" name="email" placeholder="Tu mail*" />
-                    
-                    </div>
-                    <div class="col-md-6 mb-30px">
-                        <input class="form-control required" type="text" name="pais" placeholder="Tu país*" />
-                    </div>
-                    <div class="col-md-6 mb-30px">
-                        <input class="form-control" type="tel" name="telefono" placeholder="Tu teléfono" />
-                    </div>
-
-
-                    <div class="col-xl-6 col-md-7 last-paragraph-no-margin">
-                        <p class="text-center text-md-start fs-15 lh-28">Nos comprometemos a proteger tu privacidad.
-                            Nunca recopilaremos información sin tu consentimiento explícito.</p>
-                    </div>
-                    <div class="col-xl-6 col-md-5 text-center text-md-end sm-mt-20px">
-                        <input type="hidden" name="redirect" value="">
-                        <button class="btn btn-gradient-emerald-blue-emerald-green btn-small btn-round-edge submit"
-                            type="submit">Registrarse</button>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-results mt-20px d-none"></div>
-                    </div>
-                </form>
-                </div>
-                        </div>
-                        <label for="newsletter-off" class="fs-15"><input
-                                class="w-auto me-10px position-relative top-1px p-0" type="checkbox" id="newsletter-off"
-                                name="newsletter-off">Don't show this popup again</label>
-                    </div>
-                    <button title="Close (Esc)" type="button" class="mfp-close text-dark-gray"></button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end subscription popup -->
 
 <!-- start scroll progress -->
 <div class="scroll-progress d-none d-xxl-block">
