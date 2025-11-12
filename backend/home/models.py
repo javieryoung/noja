@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
+from tinymce import models as tinymce_models
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -41,3 +42,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
+class New(models.Model):
+    title = models.CharField(max_length=200)
+    subtitle = models.CharField(max_length=300)
+    content = tinymce_models.HTMLField()
+    image = models.FileField(upload_to='news_images/')
+    date = models.DateTimeField()
+
+    def __str__(self):
+        return self.title
+

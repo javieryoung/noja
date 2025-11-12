@@ -4,4 +4,5 @@ from .views import Homepage
 
 urlpatterns = [
     path('homepage/', Homepage.as_view(), name='Homepage'),
+
 ]
