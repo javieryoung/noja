@@ -465,9 +465,16 @@
                     <div class="col-md-6 mb-30px">
                         <input class="form-control required" type="email" name="email" placeholder="Tu mail*" />
                     </div>
-                    <div class="col-md-6 mb-30px">
-                        <input class="form-control required" type="text" name="pais" placeholder="Tu país*" />
-                    </div>
+              
+                        <div class="col-md-6 mb-30px">
+                            <select class="form-control required" name="pais">
+                                <option value="" disabled selected>Selecciona tu país*</option>
+                                {% for code, name in countries.items %}
+                                <option value="{{ code }}">{{ name }}</option>
+                                  {% endfor %}
+                            </select>
+                        </div>
+ 
                     <div class="col-md-6 mb-30px">
                         <input class="form-control" type="tel" name="telefono" placeholder="Tu teléfono" />
                     </div>
