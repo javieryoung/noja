@@ -1,8 +1,9 @@
 from django.views import View
-from django.shortcuts import render
-from .forms import CustomUserCreationForm
+from django.shortcuts import render, get_object_or_404
+from .forms import CustomUserCreationForm, NewAdminForm
 from .constants import COUNTRIES_KEYS
 from .models import New
+
 
 
 class Homepage(View):
@@ -31,4 +32,10 @@ class Homepage(View):
                 'form': form,
                 'countries': COUNTRIES_KEYS
             })
+    
+def new_detail(request, pk):
+    new = get_object_or_404(New, pk=pk)
+    return render(request, 'new_detail.html', {'new': new})
+
+
 

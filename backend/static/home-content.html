@@ -185,10 +185,10 @@
                                 </div>
                             </div>
                             <div class="card-body p-13 md-p-11">
-                                <a href="demo-startup-blog-single-simple.html"
+                                <a href="{% url 'new_detail' pk=new.pk %}"
                                     class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">{{new.subtitle}}</a>
                                 <p>{{new.content|truncatewords:30 }}</p>
-                                <img src="{{ news.file.url }}" alt="new-image" class="mt-10px mb-20px" />
+                                <img src="{{ new.image.url }}" alt="new-image" class="mt-10px mb-20px" />
                                 <div
                                     class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
                                     <div class="me-auto">
