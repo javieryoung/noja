@@ -1,6 +1,6 @@
-from django.views import View
 from django.shortcuts import render, get_object_or_404
-from .forms import CustomUserCreationForm, NewAdminForm
+from .forms import CustomUserCreationForm
+from django.views import View
 from .constants import COUNTRIES_KEYS
 from .models import New
 
@@ -36,6 +36,11 @@ class Homepage(View):
 def new_detail(request, pk):
     new = get_object_or_404(New, pk=pk)
     return render(request, 'new_detail.html', {'new': new})
+
+def news_list(request):
+    news = New.objects.all().order_by('-date') 
+    return render(request, 'news.html', {'news': news})
+
 
 
 
