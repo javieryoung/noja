@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sessions',
+    'rest_framework',
     'home',
 ]
 
@@ -83,8 +85,14 @@ WSGI_APPLICATION = 'noja.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB','noja_db'),
+        'USER': os.getenv('POSTGRES_USER','priveiro'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD','21Gramos'),
+        'HOST': os.getenv('POSTGRES_HOST','localhost'),
+        'PORT': os.getenv('POSTGRES_PORT',5432),
+
+
     }
 }
 
@@ -134,3 +142,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Custom user model
+AUTH_USER_MODEL = 'home.CustomUser'
