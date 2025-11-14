@@ -8,4 +8,5 @@ urlpatterns = [
     path('news/', news_list, name='news_list'),
 
 
+
 ]

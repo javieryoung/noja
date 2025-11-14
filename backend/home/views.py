@@ -3,6 +3,8 @@ from .forms import CustomUserCreationForm
 from django.views import View
 from .constants import COUNTRIES_KEYS
 from .models import New
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 
 
@@ -38,9 +40,21 @@ def new_detail(request, pk):
     return render(request, 'new_detail.html', {'new': new})
 
 def news_list(request):
-    news = New.objects.all().order_by('-date') 
-    return render(request, 'news.html', {'news': news})
+    news_queryset = New.objects.all().order_by('-date')
+    paginator = Paginator(news_queryset, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
 
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.GET.get('format') == 'json':
+        news_data = [
+            {'id': n.id, 'title': n.title}
+            for n in page_obj
+        ]
+        return JsonResponse({
+            'news': news_data,
+            'page': page_obj.number,
+            'total_pages': paginator.num_pages,
+        })
 
-
+    return render(request, 'news.html', {'news': page_obj})
 
