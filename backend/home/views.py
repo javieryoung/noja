@@ -19,11 +19,13 @@ class Homepage(View):
             return render(request, 'home-content.html', context={
                 'form': CustomUserCreationForm(),  # formulario limpio
                 'success_message': 'Formulario guardado correctamente',
-                'countries': COUNTRIES_KEYS
+                'countries': COUNTRIES_KEYS,
+                'anchor': 'home-form'
             })
         else:
             return render(request, 'home-content.html', context={
                 'form': form,
-                'countries': COUNTRIES_KEYS
+                'countries': COUNTRIES_KEYS,
+                'anchor': 'home-form'
             })
 

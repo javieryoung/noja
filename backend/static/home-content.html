@@ -443,7 +443,7 @@
 
     <div class="container">
         <div class="row justify-content-center mb-3">
-            <div class="col-lg-7 text-center"
+            <div class="col-lg-7 text-center" id="home-form"
                 data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                 <span class="alt-font text-uppercase fw-600 d-inline-block ls-1px">Feel free to get in touch!</span>
                 <h3 class="alt-font text-dark-gray fw-600 ls-minus-1px shadow-none" data-shadow-animation="true"
@@ -452,8 +452,15 @@
                     you?</h3>
             </div>
         </div>
-        <div class="row row-cols-md-1 justify-content-center">
+        <div class="row row-cols-md-1 justify-content-center" >
             <div class="col-xl-9 overflow-hidden">
+                {% if anchor %}
+                <script type="text/javascript">
+                    document.addEventListener('DOMContentLoaded', function () {
+                        window.location.hash = '{{ anchor }}';
+                    });
+                </script>
+                {% endif %}
                 <!-- start contact form -->
                 <form action="/home/homepage/" method="post" class="row contact-form-style-02"
                     data-anime='{ "translateX": [0, 0], "opacity": [0,1], "duration": 600, "delay": 250, "staggervalue": 300, "easing": "easeOutQuad" }'>
@@ -465,16 +472,16 @@
                     <div class="col-md-6 mb-30px">
                         <input class="form-control required" type="email" name="email" placeholder="Tu mail*" />
                     </div>
-              
-                        <div class="col-md-6 mb-30px">
-                            <select class="form-control required" name="pais">
-                                <option value="" disabled selected>Selecciona tu país*</option>
-                                {% for code, name in countries.items %}
-                                <option value="{{ code }}">{{ name }}</option>
-                                  {% endfor %}
-                            </select>
-                        </div>
- 
+
+                    <div class="col-md-6 mb-30px">
+                        <select class="form-control required" name="pais">
+                            <option value="" disabled selected>Selecciona tu país*</option>
+                            {% for code, name in countries.items %}
+                            <option value="{{ code }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
                     <div class="col-md-6 mb-30px">
                         <input class="form-control" type="tel" name="telefono" placeholder="Tu teléfono" />
                     </div>
