@@ -1,3 +1,6 @@
 node_modules/
 .env.local
+/media/
+/static/node_modules/
 staticfiles/
+backend/media/
