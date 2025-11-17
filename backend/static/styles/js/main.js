@@ -2143,6 +2143,10 @@
                         resultsObj.addClass(result.alert).html(result.message);
                         resultsObj.removeClass('d-none').fadeIn('slow').delay(4000).fadeOut('slow');
                     }
+                },
+                error: function (result) {
+                    _this.removeClass('loading');
+                    console.log(result)
                 }
             });
         }
