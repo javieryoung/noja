@@ -48,7 +48,7 @@ class New(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=300)
     content = HTMLField()
-    image = models.FileField(upload_to='news_images/')
+    image = models.FileField(upload_to='news_images/', blank=True, null=True)
     date = models.DateTimeField()
 
     def __str__(self):
