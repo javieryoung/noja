@@ -1,0 +1,243 @@
+﻿<!doctype html>
+
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="cover-background one-fifth-screen bg-dark-gray ipad-top-space-margin d-flex align-items-center"
+    style="background-image: url(https://via.placeholder.com/1920x1100); position: relative;top: -40px;">
+    <div class="opacity-light bg-gradient-dark-transparent"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 position-relative"
+                data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                <div class="d-inline-block mb-20px">
+                    <span class="text-white fs-18 opacity-6">
+                        <a href="demo-startup-blog.html" class="text-white">{{ new.date }}</a>
+                        <span class="d-inline-block fs-24 opacity-5 align-middle ms-15px me-15px">•</span>
+                        <p class="d-inline-block text-white"> {{ new.title }} </p>
+
+                    </span>
+                </div>
+                <h1
+                    class="text-white w-60 lg-w-80 md-w-70 sm-w-100 alt-font fw-700 ls-minus-2px text-shadow-double-large mb-0">
+                    {{ new.subtitle }}</h1>
+                <div class="text-white fs-18 mt-4 sm-mt-40px">
+                    <img class="w-90px h-90px rounded-circle me-10px" src="https://via.placeholder.com/187x187" alt="">
+                    <a href="demo-startup-blog.html" class="text-white text-decoration-line-bottom">Shane smith</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->
+<!-- start section -->
+<section class="pb-0">
+    <div class="container">
+        <div class="row justify-content-center"
+            data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+
+
+            <div class="col-lg-10 mb-6 sm-mb-35px last-paragraph-no-margin">
+                <img src="{{ new.image.url }}" alt="new-image" class="w-100 mb-20px"
+                    style="max-height: 300px; object-fit: cover; object-position: center top;" />
+                <p class="w-90 lg-w-100">{{ new.content }}</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- end section -->
+<!-- start section -->
+<section class="half-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row mb-30px">
+                    <div class="tag-cloud col-md-9 text-center text-md-start sm-mb-15px">
+                        <a href="demo-startup-blog.html">Development</a>
+                        <a href="demo-startup-blog.html">Event</a>
+                        <a href="demo-startup-blog.html">Multimedia </a>
+                        <a href="demo-startup-blog.html">Fashion</a>
+                    </div>
+                    <div class="tag-cloud col-md-3 text-uppercase text-center text-md-end">
+                        <a class="likes-count fw-500 mx-0" href="#"><i
+                                class="fa-regular fa-heart text-red me-10px"></i><span
+                                class="text-dark-gray text-dark-gray-hover">05 Likes</span></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-6">
+                        <div
+                            class="d-block d-md-flex w-100 box-shadow-extra-large align-items-center border-radius-4px p-7 sm-p-35px">
+                            <div class="w-140px text-center me-50px sm-mx-auto">
+                                <img src="https://via.placeholder.com/125x125" class="rounded-circle w-120px" alt="">
+                                <a href="demo-startup-blog.html"
+                                    class="text-dark-gray fw-500 mt-20px d-inline-block lh-20">Colene Landin</a>
+                                <span class="fs-15 lh-20 d-block sm-mb-15px">Co-founder</span>
+                            </div>
+                            <div class="w-75 sm-w-100 text-center text-md-start last-paragraph-no-margin">
+                                <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    ipsum has been the industry's standard dummy text ever since the 1500s when an
+                                    unknown printer took a galley of printing and typesetting.</p>
+                                <a href="demo-startup-blog.html"
+                                    class="btn btn-link btn-medium text-dark-gray mt-15px">All author posts</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center elements-social social-icon-style-04">
+                        <ul class="medium-icon dark">
+                            <li><a class="facebook" href="https://www.facebook.com/" target="_blank"><i
+                                        class="fa-brands fa-facebook-f"></i><span></span></a></li>
+                            <li><a class="twitter" href="http://www.twitter.com" target="_blank"><i
+                                        class="fa-brands fa-twitter"></i><span></span></a></li>
+                            <li><a class="instagram" href="http://www.instagram.com" target="_blank"><i
+                                        class="fa-brands fa-instagram"></i><span></span></a></li>
+                            <li><a class="linkedin" href="http://www.linkedin.com" target="_blank"><i
+                                        class="fa-brands fa-linkedin-in"></i><span></span></a></li>
+                            <li><a class="behance" href="http://www.behance.com/" target="_blank"><i
+                                        class="fa-brands fa-behance"></i><span></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->
+<!-- start section -->
+<section class="bg-very-light-gray">
+    <div class="container">
+        <div class="row justify-content-center mb-1">
+            <div class="col-lg-7 text-center"
+                data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                <span class="alt-font text-uppercase fw-600 d-inline-block ls-1px">You may also like</span>
+                <h3 class="alt-font text-dark-gray fw-600 ls-minus-2px shadow-none" data-shadow-animation="true"
+                    data-animation-delay="700">Related <span class="text-highlight fw-800">posts<span
+                            class="bg-gradient-emerald-blue-emerald-green h-8px bottom-10px opacity-6 separator-animation"></span></span>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 px-0">
+                <ul class="blog-grid blog-wrapper grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-double-extra-large"
+                    data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                    <li class="grid-sizer"></li>
+                    <!-- start blog item -->
+                    <li class="grid-item">
+                        <div
+                            class="card border-0 border-radius-5px box-shadow-quadruple-large box-shadow-quadruple-large-hover">
+                            <div class="blog-image">
+                                <a href="demo-startup-blog-single-simple.html" class="d-block"><img
+                                        src="https://via.placeholder.com/600x430" alt="" /></a>
+                                <div class="blog-categories">
+                                    <a href="demo-startup-blog.html"
+                                        class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Agency</a>
+                                </div>
+                            </div>
+                            <div class="card-body p-13 md-p-11">
+                                <a href="demo-startup-blog-single-simple.html"
+                                    class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">Build
+                                    up healthy habits and strong peaceful life</a>
+                                <p>Lorem ipsum dolor consectetur adipiscing eiusmod tempor</p>
+                                <div
+                                    class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
+                                    <div class="me-auto">
+                                        <span class="blog-date d-inline-block">30 August 2021</span>
+                                        <div class="d-inline-block author-name">By <a href="demo-startup-blog.html"
+                                                class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom">Den
+                                                viliamson</a></div>
+                                    </div>
+                                    <div class="like-count">
+                                        <a href="demo-startup-blog-single-simple.html"><i
+                                                class="fa-regular fa-heart text-base-color d-inline-block"></i><span
+                                                class="text-dark-gray align-middle">25</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- end blog item -->
+                    <!-- start blog item -->
+                    <li class="grid-item">
+                        <div
+                            class="card border-0 border-radius-5px box-shadow-quadruple-large box-shadow-quadruple-large-hover">
+                            <div class="blog-image">
+                                <a href="demo-startup-blog-single-simple.html" class="d-block"><img
+                                        src="https://via.placeholder.com/600x430" alt="" /></a>
+                                <div class="blog-categories">
+                                    <a href="demo-startup-blog.html"
+                                        class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Luxurious</a>
+                                </div>
+                            </div>
+                            <div class="card-body p-13 md-p-11">
+                                <a href="demo-startup-blog-single-simple.html"
+                                    class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">How
+                                    to bring the season into your great marketing</a>
+                                <p>Lorem ipsum dolor consectetur adipiscing eiusmod tempor</p>
+                                <div
+                                    class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
+                                    <div class="me-auto">
+                                        <span class="blog-date d-inline-block">28 August 2021</span>
+                                        <div class="d-inline-block author-name">By <a href="demo-startup-blog.html"
+                                                class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom">Hugh
+                                                macleod</a></div>
+                                    </div>
+                                    <div class="like-count">
+                                        <a href="demo-startup-blog-single-simple.html"><i
+                                                class="fa-regular fa-heart text-base-color d-inline-block"></i><span
+                                                class="text-dark-gray align-middle">58</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- end blog item -->
+                    <!-- start blog item -->
+                    <li class="grid-item">
+                        <div
+                            class="card border-0 border-radius-5px box-shadow-quadruple-large box-shadow-quadruple-large-hover">
+                            <div class="blog-image">
+                                <a href="demo-startup-blog-single-simple.html" class="d-block"><img
+                                        src="https://via.placeholder.com/600x430" alt="" /></a>
+                                <div class="blog-categories">
+                                    <a href="demo-startup-blog.html"
+                                        class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Business</a>
+                                </div>
+                            </div>
+                            <div class="card-body p-13 md-p-11">
+                                <a href="demo-startup-blog-single-simple.html"
+                                    class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">Be
+                                    the strong willed one the public relationship</a>
+                                <p>Lorem ipsum dolor consectetur adipiscing eiusmod tempor</p>
+                                <div
+                                    class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
+                                    <div class="me-auto">
+                                        <span class="blog-date d-inline-block">26 August 2021</span>
+                                        <div class="d-inline-block author-name">By <a href="demo-startup-blog.html"
+                                                class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom">Walton
+                                                smith</a></div>
+                                    </div>
+                                    <div class="like-count">
+                                        <a href="demo-startup-blog-single-simple.html"><i
+                                                class="fa-regular fa-heart text-base-color d-inline-block"></i><span
+                                                class="text-dark-gray align-middle">75</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- end blog item -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->
+
+
+{% endblock %}
