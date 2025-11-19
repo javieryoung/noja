@@ -4,3 +4,7 @@ node_modules/
 .vscode/
 /backend/noja/staticfiles/
 /backend/noja/media/
+/media/
+/static/node_modules/
+staticfiles/
+backend/media/

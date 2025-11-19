@@ -27,12 +27,14 @@ class Homepage(View):
                 'form': CustomUserCreationForm(),  # formulario limpio
                 'success_message': 'Formulario guardado correctamente',
                 'countries': COUNTRIES_KEYS,
-                'news_list': news
+                'anchor': 'home-form',
+                'news_list': news,
             })
         else:
             return render(request, 'home-content.html', context={
                 'form': form,
-                'countries': COUNTRIES_KEYS
+                'countries': COUNTRIES_KEYS,
+                'anchor': 'home-form'
             })
     
 def new_detail(request, pk):
