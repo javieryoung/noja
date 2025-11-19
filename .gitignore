@@ -1,5 +1,9 @@
 node_modules/
 .env.local
+.env.*.local
+.vscode/
+/backend/noja/staticfiles/
+/backend/noja/media/
 /media/
 /static/node_modules/
 staticfiles/

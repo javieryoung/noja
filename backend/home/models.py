@@ -54,3 +54,19 @@ class New(models.Model):
     def __str__(self):
         return self.title
 
+class Suggestion(models.Model):
+    DIRECTION_CHOICES = [
+        ('up', 'Up'),
+        ('down', 'Down'),
+    ]
+
+    date = models.DateTimeField()
+    symbol = models.TextField()
+    new = models.ForeignKey(New, on_delete=models.CASCADE, related_name='suggestions')
+    description = models.TextField()
+    title = models.TextField()
+    direction = models.CharField(max_length=4, choices=DIRECTION_CHOICES)
+
+    def __str__(self):
+        return f"{self.symbol} - {self.direction}"
+

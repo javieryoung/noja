@@ -39,7 +39,11 @@ class Homepage(View):
     
 def new_detail(request, pk):
     new = get_object_or_404(New, pk=pk)
-    return render(request, 'new_detail.html', {'new': new})
+    suggestions = new.suggestions.all().order_by('-date')
+    return render(request, 'new_detail.html', {
+        'new': new,
+        'suggestions': suggestions,
+    })
 
 def news_list(request):
     news_queryset = New.objects.all().order_by('-date')

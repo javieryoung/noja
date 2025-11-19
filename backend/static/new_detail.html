@@ -115,9 +115,9 @@
         <div class="row justify-content-center mb-1">
             <div class="col-lg-7 text-center"
                 data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                <span class="alt-font text-uppercase fw-600 d-inline-block ls-1px">You may also like</span>
+                <span class="alt-font text-uppercase fw-600 d-inline-block ls-1px">Be aware of these</span>
                 <h3 class="alt-font text-dark-gray fw-600 ls-minus-2px shadow-none" data-shadow-animation="true"
-                    data-animation-delay="700">Related <span class="text-highlight fw-800">posts<span
+                    data-animation-delay="700">Suggested <span class="text-highlight fw-800">actions<span
                             class="bg-gradient-emerald-blue-emerald-green h-8px bottom-10px opacity-6 separator-animation"></span></span>
                 </h3>
             </div>
@@ -128,6 +128,7 @@
                     data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
                     <li class="grid-sizer"></li>
                     <!-- start blog item -->
+                     {% for suggestion in suggestions %}
                     <li class="grid-item">
                         <div
                             class="card border-0 border-radius-5px box-shadow-quadruple-large box-shadow-quadruple-large-hover">
@@ -136,18 +137,17 @@
                                         src="https://via.placeholder.com/600x430" alt="" /></a>
                                 <div class="blog-categories">
                                     <a href="demo-startup-blog.html"
-                                        class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Agency</a>
+                                        class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">{{suggestion.symbol}}</a>
                                 </div>
                             </div>
                             <div class="card-body p-13 md-p-11">
                                 <a href="demo-startup-blog-single-simple.html"
-                                    class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">Build
-                                    up healthy habits and strong peaceful life</a>
-                                <p>Lorem ipsum dolor consectetur adipiscing eiusmod tempor</p>
+                                    class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">{{suggestion.title}}</a>
+                                <p>{{suggestion.description}}</p>
                                 <div
                                     class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
                                     <div class="me-auto">
-                                        <span class="blog-date d-inline-block">30 August 2021</span>
+                                        <span class="blog-date d-inline-block">{{suggestion.date}}</span>
                                         <div class="d-inline-block author-name">By <a href="demo-startup-blog.html"
                                                 class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom">Den
                                                 viliamson</a></div>
@@ -155,83 +155,15 @@
                                     <div class="like-count">
                                         <a href="demo-startup-blog-single-simple.html"><i
                                                 class="fa-regular fa-heart text-base-color d-inline-block"></i><span
-                                                class="text-dark-gray align-middle">25</span></a>
+                                                class="text-dark-gray align-middle">{{suggestion.direction}}</span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
+                    {% endfor %}
                     <!-- end blog item -->
-                    <!-- start blog item -->
-                    <li class="grid-item">
-                        <div
-                            class="card border-0 border-radius-5px box-shadow-quadruple-large box-shadow-quadruple-large-hover">
-                            <div class="blog-image">
-                                <a href="demo-startup-blog-single-simple.html" class="d-block"><img
-                                        src="https://via.placeholder.com/600x430" alt="" /></a>
-                                <div class="blog-categories">
-                                    <a href="demo-startup-blog.html"
-                                        class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Luxurious</a>
-                                </div>
-                            </div>
-                            <div class="card-body p-13 md-p-11">
-                                <a href="demo-startup-blog-single-simple.html"
-                                    class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">How
-                                    to bring the season into your great marketing</a>
-                                <p>Lorem ipsum dolor consectetur adipiscing eiusmod tempor</p>
-                                <div
-                                    class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
-                                    <div class="me-auto">
-                                        <span class="blog-date d-inline-block">28 August 2021</span>
-                                        <div class="d-inline-block author-name">By <a href="demo-startup-blog.html"
-                                                class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom">Hugh
-                                                macleod</a></div>
-                                    </div>
-                                    <div class="like-count">
-                                        <a href="demo-startup-blog-single-simple.html"><i
-                                                class="fa-regular fa-heart text-base-color d-inline-block"></i><span
-                                                class="text-dark-gray align-middle">58</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- end blog item -->
-                    <!-- start blog item -->
-                    <li class="grid-item">
-                        <div
-                            class="card border-0 border-radius-5px box-shadow-quadruple-large box-shadow-quadruple-large-hover">
-                            <div class="blog-image">
-                                <a href="demo-startup-blog-single-simple.html" class="d-block"><img
-                                        src="https://via.placeholder.com/600x430" alt="" /></a>
-                                <div class="blog-categories">
-                                    <a href="demo-startup-blog.html"
-                                        class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Business</a>
-                                </div>
-                            </div>
-                            <div class="card-body p-13 md-p-11">
-                                <a href="demo-startup-blog-single-simple.html"
-                                    class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">Be
-                                    the strong willed one the public relationship</a>
-                                <p>Lorem ipsum dolor consectetur adipiscing eiusmod tempor</p>
-                                <div
-                                    class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
-                                    <div class="me-auto">
-                                        <span class="blog-date d-inline-block">26 August 2021</span>
-                                        <div class="d-inline-block author-name">By <a href="demo-startup-blog.html"
-                                                class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom">Walton
-                                                smith</a></div>
-                                    </div>
-                                    <div class="like-count">
-                                        <a href="demo-startup-blog-single-simple.html"><i
-                                                class="fa-regular fa-heart text-base-color d-inline-block"></i><span
-                                                class="text-dark-gray align-middle">75</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- end blog item -->
+               
                 </ul>
             </div>
         </div>
