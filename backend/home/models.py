@@ -60,11 +60,11 @@ class Suggestion(models.Model):
         ('down', 'Down'),
     ]
 
-    date = models.DateTimeField()
+    date = models.DateTimeField(null=True, blank=True)
     symbol = models.TextField()
-    new = models.ForeignKey(New, on_delete=models.CASCADE, related_name='suggestions')
-    description = models.TextField()
-    title = models.TextField()
+    new = models.ForeignKey(New, on_delete=models.CASCADE, related_name='suggestions', null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    title = models.TextField(null=True, blank=True)
     direction = models.CharField(max_length=4, choices=DIRECTION_CHOICES)
 
     def __str__(self):
