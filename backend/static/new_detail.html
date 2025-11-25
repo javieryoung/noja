@@ -41,8 +41,10 @@
 
 
             <div class="col-lg-10 mb-6 sm-mb-35px last-paragraph-no-margin">
+                {% if new.image %}
                 <img src="{{ new.image.url }}" alt="new-image" class="w-100 mb-20px"
                     style="max-height: 300px; object-fit: cover; object-position: center top;" />
+                {% endif %}
                 <p class="w-90 lg-w-100">{{ new.content }}</p>
             </div>
 
@@ -128,7 +130,7 @@
                     data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
                     <li class="grid-sizer"></li>
                     <!-- start blog item -->
-                     {% for suggestion in suggestions %}
+                    {% for suggestion in suggestions %}
                     <li class="grid-item">
                         <div
                             class="card border-0 border-radius-5px box-shadow-quadruple-large box-shadow-quadruple-large-hover">
@@ -163,7 +165,7 @@
                     </li>
                     {% endfor %}
                     <!-- end blog item -->
-               
+
                 </ul>
             </div>
         </div>
