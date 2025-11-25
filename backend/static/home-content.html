@@ -401,7 +401,7 @@
                 </script>
                 {% endif %}
                 <!-- start contact form -->
-                <form action="/home/homepage/" method="post" class="row contact-form-style-02"
+                <form action="{% url 'Homepage' %}" method="post" class="row contact-form-style-02"
                     data-anime='{ "translateX": [0, 0], "opacity": [0,1], "duration": 600, "delay": 250, "staggervalue": 300, "easing": "easeOutQuad" }'>
                     {% csrf_token %}
 

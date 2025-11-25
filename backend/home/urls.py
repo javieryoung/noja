@@ -7,6 +7,4 @@ urlpatterns = [
     path('new/<int:pk>/', new_detail, name='new_detail'),
     path('news/', news_list, name='news_list'),
 
-
-
 ]
