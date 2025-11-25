@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'tinymce',
     'rest_framework',
     'home',
+    'mailer', 
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" style="margin:0;padding:0;">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ subject|default:"" }}</title>
+    <style>
+      /* Fallbacks mínimos para clientes que sí respetan <style> */
+      @media only screen and (max-width: 600px) {
+        .container { width: 100% !important; }
+        .content { padding: 16px !important; }
+        .btn { display: block !important; width: 100% !important; }
+      }
+    </style>
+  </head>
+  <body style="margin:0;padding:0;background-color:#f5f7fb;">
+    <!-- Preheader (texto invisible que algunos clientes muestran como resumen) -->
+    <div style="display:none;font-size:1px;color:#f5f7fb;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
+      {{ preheader|default:"" }}
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f5f7fb;">
+      <tr>
+        <td align="center">
+
+          <!-- Contenedor principal -->
+          <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background-color:#ffffff;margin:24px auto;border-radius:8px;overflow:hidden;border:1px solid #e5e9f2;">
+            <!-- Header -->
+            <tr>
+              <td align="center" style="background-color:#0b5fff;padding:24px;">
+                <a href="{{ brand_url|default:'#' }}" style="text-decoration:none;" target="_blank" rel="noopener">
+                  <img src="{{ brand_logo_url|default:'' }}" alt="{{ brand_name|default:'Tu Marca' }}" width="120" style="display:block;border:0;outline:none;text-decoration:none;margin:0 auto;">
+                </a>
+              </td>
+            </tr>
+
+            <!-- Título -->
+            <tr>
+              <td class="content" style="padding:24px 32px 8px 32px;font-family:Segoe UI, Roboto, Helvetica, Arial, sans-serif;color:#111827;">
+                <h1 style="margin:0;font-size:22px;line-height:1.3;font-weight:700;">
+                  {{ title|default:subject }}
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Saludo -->
+            <tr>
+              <td class="content" style="padding:0 32px 8px 32px;font-family:Segoe UI, Roboto, Helvetica, Arial, sans-serif;color:#111827;">
+                <p style="margin:0;font-size:15px;line-height:1.6;">
+                  Hola {{ user_name|default:"" }},
+                </p>
+              </td>
+            </tr>
+
+            <!-- Mensaje principal -->
+            <tr>
+              <td class="content" style="padding:0 32px 16px 32px;font-family:Segoe UI, Roboto, Helvetica, Arial, sans-serif;color:#374151;">
+                <!-- Puedes pasar HTML seguro en body_html; si no, cae al body_text -->
+                {% if body_html %}
+                  {{ body_html|safe }}
+                {% else %}
+                  <p style="margin:0;font-size:15px;line-height:1.7;">
+                    {{ body_text|default:"" }}
+                  </p>
+                {% endif %}
+              </td>
+            </tr>
+
+            <!-- Botón de acción (opcional) -->
+            {% if action_url %}
+            <tr>
+              <td align="center" style="padding:8px 32px 24px 32px;">
+                <a href="{{ action_url }}" target="_blank" rel="noopener"
+                   class="btn"
+                   style="font-family:Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+                          display:inline-block;background-color:#0b5fff;color:#ffffff;
+                          text-decoration:none;font-weight:600;font-size:15px;
+                          padding:12px 20px;border-radius:6px;">
+                  {{ action_label|default:"Ver detalle" }}
+                </a>
+              </td>
+            </tr>
+            {% endif %}
+
+            <!-- Bloque de datos/alerta (opcional) -->
+            {% if info_items %}
+            <tr>
+              <td class="content" style="padding:0 32px 24px 32px;font-family:Segoe UI, Roboto, Helvetica, Arial, sans-serif;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;border:1px solid #e5e7eb;border-radius:6px;">
+                  <tr>
+                    <td style="padding:12px 16px;color:#111827;font-size:14px;">
+                      {% for item in info_items %}
+                        <div style="margin:4px 0;">
+                          <strong style="font-weight:600;">{{ item.label }}:</strong>
+                          <span>{{ item.value }}</span>
+                        </div>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            {% endif %}
+
+            <!-- Firma -->
+            <tr>
+              <td class="content" style="padding:0 32px 24px 32px;font-family:Segoe UI, Roboto, Helvetica, Arial, sans-serif;color:#374151;">
+                <p style="margin:0;font-size:15px;line-height:1.7;">
+                  Gracias,<br>
+                  {{ brand_name|default:"Equipo" }}
+                </p>
+              </td>
+            </tr>
+
+            <!-- Footer legal -->
+            <tr>
+              <td align="center" style="padding:16px 24px 24px 24px;background-color:#ffffff;border-top:1px solid #e5e9f2;font-family:Segoe UI, Roboto, Helvetica, Arial, sans-serif;">
+                <p style="margin:0;color:#6b7280;font-size:12px;line-height:1.6;">
+                  Este mensaje fue enviado a {{ user_email|default:"tu correo" }}.
+                  Si no esperabas este email, puedes ignorarlo o
+                  <a href="{{ support_url|default:'#' }}" target="_blank" rel="noopener" style="color:#0b5fff;text-decoration:underline;">contactar soporte</a>.
+                </p>
+                {% if unsubscribe_url %}
+                <p style="margin:8px 0 0 0;color:#6b7280;font-size:12px;">
+                  <a href="{{ unsubscribe_url }}" target="_blank" rel="noopener" style="color:#0b5fff;text-decoration:underline;">Darse de baja</a>
+                </p>
+                {% endif %}
+                <p style="margin:8px 0 0 0;color:#9ca3af;font-size:11px;">
+                  © {{ current_year|default:"" }} {{ brand_name|default:"Tu Marca" }}. Todos los derechos reservados.
+                </p>
+              </td>
+            </tr>
+
+          </table>
+          <!-- /Contenedor principal -->
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

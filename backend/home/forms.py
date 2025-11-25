@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 from tinymce.widgets import TinyMCE
 from .models import New
+from mailer.models import Mailer
 
 
 
@@ -16,7 +17,22 @@ class CustomUserCreationForm(forms.ModelForm):
         user.set_unusable_password()
         if commit:
             user.save()
+
+            # Registrar un Mailer pendiente
+            Mailer.objects.create(
+                email=user.email,
+                user=user,
+                subject="Bienvenido a Noja",
+                context={
+                    "nombre": user.nombre,
+                    "pais": user.pais,
+                    "telefono": user.telefono
+                },
+                template="https://mis-templates.s3.amazonaws.com/bienvenida.html"
+            )
+
         return user
+
     
 class NewAdminForm(forms.ModelForm):
     content = forms.CharField(widget=TinyMCE(mce_attrs={
