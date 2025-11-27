@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sugerencias del día</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #fafafa; color: #333; margin:0; padding:20px;">
+    <h2>Sugerencias del día</h2>
+
+    {% for suggestion in suggestions %}
+        <div style="border:1px solid #ddd; border-radius:6px; padding:15px; margin-bottom:20px; background-color:#fff;">
+            <div style="font-size:18px; font-weight:bold;">
+                {{ suggestion.symbol }}
+                {% if suggestion.direction == "up" %}
+                    <span style="color:green;">({{ suggestion.get_direction_display }})</span>
+                {% else %}
+                    <span style="color:red;">({{ suggestion.get_direction_display }})</span>
+                {% endif %}
+            </div>
+            <h3>{{ suggestion.title }}</h3>
+            <p>{{ suggestion.description }}</p>
+            {% if suggestion.date %}
+                <div>Fecha: {{ suggestion.date|date:"d/m/Y H:i" }}</div>
+            {% endif %}
+            <a href="{{ suggestion.new.get_absolute_url }}" style="margin-top:10px; display:inline-block; text-decoration:none; color:#0066cc;">
+                Ver noticia relacionada
+            </a>
+        </div>
+    {% empty %}
+        <p>No hay sugerencias para hoy.</p>
+    {% endfor %}
+</body>
+</html>

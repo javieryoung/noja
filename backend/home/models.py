@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
+from django.urls import reverse
 from tinymce.models import HTMLField
 
 
@@ -53,6 +54,11 @@ class New(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('new_detail', args=[str(self.id)])
+
+
 
 class Suggestion(models.Model):
     DIRECTION_CHOICES = [
