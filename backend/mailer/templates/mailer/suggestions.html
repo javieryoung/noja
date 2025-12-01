@@ -12,9 +12,9 @@
             <div style="font-size:18px; font-weight:bold;">
                 {{ suggestion.symbol }}
                 {% if suggestion.direction == "up" %}
-                    <span style="color:green;">({{ suggestion.get_direction_display }})</span>
+                    <span style="color:green;">({{ suggestion.direction }})</span>
                 {% else %}
-                    <span style="color:red;">({{ suggestion.get_direction_display }})</span>
+                    <span style="color:red;">({{ suggestion.direction }})</span>
                 {% endif %}
             </div>
             <h3>{{ suggestion.title }}</h3>
@@ -22,9 +22,11 @@
             {% if suggestion.date %}
                 <div>Fecha: {{ suggestion.date|date:"d/m/Y H:i" }}</div>
             {% endif %}
-            <a href="{{ suggestion.new.get_absolute_url }}" style="margin-top:10px; display:inline-block; text-decoration:none; color:#0066cc;">
-                Ver noticia relacionada
-            </a>
+            {% if suggestion.new_url %}
+                <a href="{{ suggestion.new_url }}" style="margin-top:10px; display:inline-block; text-decoration:none; color:#0066cc;">
+                    Ver noticia relacionada
+                </a>
+            {% endif %}
         </div>
     {% empty %}
         <p>No hay sugerencias para hoy.</p>

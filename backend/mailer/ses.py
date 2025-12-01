@@ -2,7 +2,7 @@ import boto3
 from botocore.exceptions import BotoCoreError, ClientError
 
 def send_email_ses(to_email, subject, html_body,
-                   from_email="info@noja.com", region="us-east-2"):
+                   from_email="info@noja.young.uy", region="us-east-2"):
     client = boto3.client("ses", region_name=region)
     try:
         response = client.send_email(

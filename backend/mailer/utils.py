@@ -1,44 +1,96 @@
-import requests
-from django.template import Template, Context
-from django.core.mail import EmailMultiAlternatives
+import json
+from django.template.loader import render_to_string
 from django.utils.timezone import now
 from home.models import Suggestion
+from mailer.models import Mailer
+from mailer.ses import send_email_ses
 
-def send_daily_suggestions():
-    # Filtrar sugerencias del día
-    today_suggestions = Suggestion.objects.filter(date__date=now().date())
 
-    if not today_suggestions.exists():
-        return  # No enviar nada si no hay sugerencias
+def render_local_template(template_name, context):
+    """
+    Renderiza un template local de Django y devuelve el HTML como string.
+    """
+    return render_to_string(template_name, context)
 
-    # Contexto para el template
-    context = {
-        "suggestions": today_suggestions
+
+def send_daily_suggestions_via_ses():
+    """
+    Envía las sugerencias del día a todos los destinatarios del modelo Mailer
+    usando el template local 'mailer/suggestions.html'.
+
+    hoy = now().date()
+
+    sugerencias = Suggestion.objects.filter(date__date=hoy)
+    """
+    sugerencias = Suggestion.objects.all()  # solo para probar, sin filtro de fecha
+
+    if not sugerencias.exists():
+        return 0  # nada para enviar
+
+    contexto = {
+        "suggestions": [
+            {
+                "symbol": s.symbol,
+                "title": s.title,
+                "description": s.description,
+                "direction": s.get_direction_display(),
+                "date": s.date,
+                "new_url": s.new.get_absolute_url(),
+            }
+            for s in sugerencias
+        ]
     }
 
-    # Renderizar template remoto con contexto
-    html_content = render_remote_template(
-        "https://tuservidor.com/templates/emails/suggestions.html",  # URL del template remoto
-        context
-    )
+    html = render_local_template("mailer/suggestions.html", contexto)
 
-    # Construir y enviar el correo
-    msg = EmailMultiAlternatives(
-        subject="Sugerencias del día",
-        body="Aquí están las sugerencias del día.",  # fallback en texto plano
-        from_email="tuemail@dominio.com",
-        to=["destinatario@dominio.com"],
-    )
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+    enviados = 0
+    mailer_objs = Mailer.objects.all()
 
-def render_remote_template(template_url, context_dict):
+    for mail in mailer_objs:
+        resultado = send_email_ses(
+            to_email=mail.email,
+            subject="Sugerencias del día",
+            html_body=html,
+        )
+        if resultado["status"] == "ok":
+            mail.sent_on = now()
+            mail.save()
+            enviados += 1
+
+    return enviados
+
+
+def send_pending_mails_via_ses():
     """
-    Descarga un template remoto vía HTTP y lo renderiza con el contexto dado.
+    Envía los correos pendientes del modelo Mailer,
+    renderizando el template local indicado en Mailer.template
+    con el contexto de Mailer.context.
     """
-    response = requests.get(template_url)
-    response.raise_for_status()
-    template_string = response.text
-    template = Template(template_string)
-    context = Context(context_dict)
-    return template.render(context)
+    pendientes = Mailer.objects.filter(sent_on__isnull=True)
+
+    enviados = 0
+    for mail in pendientes:
+        # mail.context puede ser dict (JSONField) o string JSON
+        contexto = mail.context
+        if isinstance(contexto, str):
+            try:
+                contexto = json.loads(contexto)
+            except json.JSONDecodeError:
+                contexto = {}
+
+        # Renderizar template local
+        html = render_local_template(mail.template, contexto)
+
+        # Enviar correo vía SES
+        resultado = send_email_ses(
+            to_email=mail.email,
+            subject=mail.subject,
+            html_body=html,
+        )
+
+        if resultado["status"] == "ok":
+            mail.sent_on = now()
+            mail.save()
+            enviados += 1
+
+    return enviados
