@@ -8,3 +8,4 @@ node_modules/
 /static/node_modules/
 staticfiles/
 backend/media/
+/backend/mailer/__pycache__/__init__.cpython-312.pyc
