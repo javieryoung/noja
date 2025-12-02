@@ -4,6 +4,7 @@ from django.utils import timezone
 from mailer.models import Mailer
 from mailer.ses import send_email_ses
 
+
 class Command(BaseCommand):
     help = "Envía Mailer pendientes (sent_on is null) usando SES"
 

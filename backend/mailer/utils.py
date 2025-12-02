@@ -6,23 +6,14 @@ from mailer.models import Mailer
 from mailer.ses import send_email_ses
 
 
-def render_local_template(template_name, context):
-    """
-    Renderiza un template local de Django y devuelve el HTML como string.
-    """
-    return render_to_string(template_name, context)
-
-
 def send_daily_suggestions_via_ses():
     """
     Envía las sugerencias del día a todos los destinatarios del modelo Mailer
     usando el template local 'mailer/suggestions.html'.
-
     hoy = now().date()
-
-    sugerencias = Suggestion.objects.filter(date__date=hoy)
     """
-    sugerencias = Suggestion.objects.all()  # solo para probar, sin filtro de fecha
+    # Para pruebas: usar todas las sugerencias
+    sugerencias = Suggestion.objects.all()  # reemplazar por .filter(date__date=hoy)
 
     if not sugerencias.exists():
         return 0  # nada para enviar
@@ -41,12 +32,11 @@ def send_daily_suggestions_via_ses():
         ]
     }
 
-    html = render_local_template("mailer/suggestions.html", contexto)
+    # Renderizar directamente con render_to_string
+    html = render_to_string("mailer/suggestions.html", contexto)
 
     enviados = 0
-    mailer_objs = Mailer.objects.all()
-
-    for mail in mailer_objs:
+    for mail in Mailer.objects.all():
         resultado = send_email_ses(
             to_email=mail.email,
             subject="Sugerencias del día",
@@ -78,10 +68,9 @@ def send_pending_mails_via_ses():
             except json.JSONDecodeError:
                 contexto = {}
 
-        # Renderizar template local
-        html = render_local_template(mail.template, contexto)
+        # Renderizar directamente con render_to_string
+        html = render_to_string(mail.template, contexto)
 
-        # Enviar correo vía SES
         resultado = send_email_ses(
             to_email=mail.email,
             subject=mail.subject,

@@ -2,7 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from dotenv import load_dotenv
+from pathlib import Path
 
 def main():
     """Run administrative tasks."""
@@ -17,6 +18,10 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
+BASE_DIR = Path(__file__).resolve().parent  # carpeta donde está manage.py
+load_dotenv(BASE_DIR / ".env.local")  # ajustá si tu .env está en backend/. [web:112][web:113]
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
+    from django.core.management import execute_from_command_line
+    execute_from_command_line(sys.argv)
