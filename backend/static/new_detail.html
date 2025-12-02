@@ -149,7 +149,9 @@
                                 <div
                                     class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
                                     <div class="me-auto">
+                                        {% if suggestion.date %}
                                         <span class="blog-date d-inline-block">{{suggestion.date}}</span>
+                                        {% endif %}
                                         <div class="d-inline-block author-name">By <a href="demo-startup-blog.html"
                                                 class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom">Den
                                                 viliamson</a></div>
