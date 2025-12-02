@@ -30,6 +30,7 @@ DEBUG = os.getenv('DJANGO_ENV', 'development').lower() == "development"
 ALLOWED_HOSTS = [
     "localhost",
     '18.118.79.112',
+    'noja.young.uy',
     'https://via.placeholder.com/148x148',
    'https://via.placeholder.com/600x430',
    'https://via.placeholder.com/600x500',
