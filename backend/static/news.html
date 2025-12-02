@@ -60,7 +60,9 @@
                         <a href="{% url 'new_detail' pk=new.pk %}"
                             class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">{{new.subtitle}}</a>
                         <p>{{new.content|truncatewords:30 }}</p>
+                        {% if new.image %}
                         <img src="{{ new.image.url }}" alt="new-image" class="mt-10px mb-20px" />
+                        {% endif %}
                         <div
                             class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
                             <div class="me-auto">
@@ -102,7 +104,7 @@
             const pagination = document.getElementById('pagination');
 
             function fetchPage(page = 1) {
-                 fetch(`/home/news/?page=${page}`, {
+                 fetch(`/news/?page=${page}`, {
                     headers: { 'X-Requested-With': 'XMLHttpRequest' }
                 })
                     .then(res => {
