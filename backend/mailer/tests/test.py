@@ -5,7 +5,6 @@ from django.utils.timezone import now
 import json
 import boto3
 from botocore.stub import Stubber
-
 from mailer.models import Mailer
 from mailer.tasks import send_pending_mails_via_ses
 from botocore.stub import Stubber, ANY
