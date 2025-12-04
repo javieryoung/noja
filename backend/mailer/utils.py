@@ -8,7 +8,8 @@ from mailer.ses import send_email_ses
 
 def send_daily_suggestions_via_ses():
     """
-    Envía las sugerencias del día a todos los destinatarios del modelo Mailer
+    Crea las isntancias de Mailer pendientes  con las sugerencias del día
+    para todos los destinatarios del modelo Mailer
     usando el template local 'mailer/suggestions.html'.
     hoy = now().date()
     """
@@ -16,7 +17,7 @@ def send_daily_suggestions_via_ses():
     sugerencias = Suggestion.objects.all()  # reemplazar por .filter(date__date=hoy)
 
     if not sugerencias.exists():
-        return 0  # nada para enviar
+        return 0
 
     contexto = {
         "suggestions": [
@@ -32,35 +33,27 @@ def send_daily_suggestions_via_ses():
         ]
     }
 
-    # Renderizar directamente con render_to_string
     html = render_to_string("mailer/suggestions.html", contexto)
 
-    enviados = 0
-    for mail in Mailer.objects.all():
-        resultado = send_email_ses(
-            to_email=mail.email,
+    creados = 0
+    for destinatario in Mailer.objects.all():
+        Mailer.objects.create(
+            email=destinatario.email,
             subject="Sugerencias del día",
-            html_body=html,
+            body=html,
+            template="mailer/suggestions.html",
+            context=contexto,
         )
-        if resultado["status"] == "ok":
-            mail.sent_on = now()
-            mail.save()
-            enviados += 1
+        creados += 1
 
-    return enviados
+    return creados
 
 
 def send_pending_mails_via_ses():
-    """
-    Envía los correos pendientes del modelo Mailer,
-    renderizando el template local indicado en Mailer.template
-    con el contexto de Mailer.context.
-    """
     pendientes = Mailer.objects.filter(sent_on__isnull=True)
 
     enviados = 0
     for mail in pendientes:
-        # mail.context puede ser dict (JSONField) o string JSON
         contexto = mail.context
         if isinstance(contexto, str):
             try:
@@ -68,7 +61,6 @@ def send_pending_mails_via_ses():
             except json.JSONDecodeError:
                 contexto = {}
 
-        # Renderizar directamente con render_to_string
         html = render_to_string(mail.template, contexto)
 
         resultado = send_email_ses(
