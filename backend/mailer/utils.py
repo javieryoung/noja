@@ -7,46 +7,30 @@ from mailer.ses import send_email_ses
 
 
 def send_daily_suggestions_via_ses():
-    """
-    Crea las isntancias de Mailer pendientes  con las sugerencias del día
-    para todos los destinatarios del modelo Mailer
-    usando el template local 'mailer/suggestions.html'.
     hoy = now().date()
-    """
-    # Para pruebas: usar todas las sugerencias
-    sugerencias = Suggestion.objects.all()  # reemplazar por .filter(date__date=hoy)
-
+    sugerencias = Suggestion.objects.filter(date__date=hoy)
+    
     if not sugerencias.exists():
         return 0
+    
 
-    contexto = {
-        "suggestions": [
-            {
-                "symbol": s.symbol,
-                "title": s.title,
-                "description": s.description,
-                "direction": s.get_direction_display(),
-                "date": s.date,
-                "new_url": s.new.get_absolute_url(),
-            }
-            for s in sugerencias
-        ]
+    contexto_template = {
+        "suggestions": [{"symbol": s.symbol, ...} for s in sugerencias]
     }
-
-    html = render_to_string("mailer/suggestions.html", contexto)
-
+    html = render_to_string("mailer/suggestions.html", contexto_template)
+    
     creados = 0
-    for destinatario in Mailer.objects.all():
+    for destinatario in Mailer.objects.filter(active=True):  # Filtrar activos
         Mailer.objects.create(
             email=destinatario.email,
             subject="Sugerencias del día",
-            body=html,
-            template="mailer/suggestions.html",
-            context=contexto,
+            body=html,  # Guardar HTML directamente
+            template=None,  # No re-renderizar
+            context={"html": html},  # Para compatibilidad
         )
         creados += 1
-
     return creados
+
 
 
 def send_pending_mails_via_ses():
