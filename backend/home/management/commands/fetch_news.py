@@ -54,7 +54,7 @@ class Command(BaseCommand):
             # Guardar Suggestion si hay símbolos
             if symbol:
                 for s in symbol.split(","):
-                    s_clean = s.strip()
+                    s_clean = s.lstrip("^").strip()
                     if s_clean:
                         Suggestion.objects.create(
                             new=new_obj,
