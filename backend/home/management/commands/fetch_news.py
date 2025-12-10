@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = "Fetch news from API and store them in New and Suggestion models"
 
     def handle(self, *args, **options):
-        url = "http://35.169.240.172:8000/resumen/latest"
+        url = "http://98.87.133.84:8000/resumen/latest"
         headers = {
             "X-API-Key": "api-newscrapper-key01"
         }
