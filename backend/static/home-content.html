@@ -170,7 +170,7 @@
             <div class="col-12 px-0">
                 <ul class="blog-grid blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-double-extra-large"
                     data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1000, "willchange": "transform", "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                    {% for new in news_list|dictsort:"date"|slice:":6" %}
+                    {% for new in news_list|dictsortreversed:"date"|slice:":6" %}
                     <li class="grid-sizer"></li>
                     <!-- start blog item -->
                     <li class="grid-item">

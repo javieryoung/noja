@@ -42,40 +42,48 @@
     <div class="container">
         <ul class="blog-grid blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-double-extra-large"
             data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1000, "willchange": "transform", "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-            {% for new in news|dictsort:"date"|slice:":10" %}
+            {% for new in news %}
             <li class="grid-sizer"></li>
             <!-- start blog item -->
             <li class="grid-item">
                 <div
                     class="card border-0 border-radius-5px box-shadow-quadruple-large box-shadow-quadruple-large-hover">
                     <div class="blog-image">
-                        <a href="demo-startup-blog-single-simple.html" class="d-block"><img
-                                src="https://via.placeholder.com/600x430" alt="" /></a>
+                        <a href="{% url 'new_detail' pk=new.pk %}" class="d-block">
+                            <img src="https://via.placeholder.com/600x430" alt="" />
+                        </a>
                         <div class="blog-categories">
                             <a href="demo-startup-blog.html"
-                                class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">{{new.title}}</a>
+                                class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">
+                                {{ new.title }}
+                            </a>
                         </div>
                     </div>
                     <div class="card-body p-13 md-p-11">
                         <a href="{% url 'new_detail' pk=new.pk %}"
-                            class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">{{new.subtitle}}</a>
-                        <p>{{new.content|truncatewords:30 }}</p>
+                            class="card-title mb-15px alt-font fw-700 fs-18 lh-30 text-dark-gray text-dark-gray-hover d-inline-block">
+                            {{ new.subtitle }}
+                        </a>
+                        <p>{{ new.content|truncatewords:30 }}</p>
                         {% if new.image %}
                         <img src="{{ new.image.url }}" alt="new-image" class="mt-10px mb-20px" />
                         {% endif %}
                         <div
                             class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
                             <div class="me-auto">
-                                <span class="blog-date d-inline-block">{{new.date}}</span>
-                                <div class="d-inline-block author-name">By <a href="demo-startup-blog.html"
-                                        class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom fw-500">Den
-                                        viliamson</a></div>
+                                <span class="blog-date d-inline-block">{{ new.date }}</span>
+                                <div class="d-inline-block author-name">
+                                    By <a href="demo-startup-blog.html"
+                                        class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom fw-500">
+                                        Den viliamson
+                                    </a>
+                                </div>
                             </div>
-
                             <div class="like-count">
-                                <a href="demo-startup-blog-single-simple.html"><i
-                                        class="fa-regular fa-heart text-base-color"></i><span
-                                        class="text-dark-gray align-middle fw-500">25</span></a>
+                                <a href="{% url 'new_detail' pk=new.pk %}">
+                                    <i class="fa-regular fa-heart text-base-color"></i>
+                                    <span class="text-dark-gray align-middle fw-500">25</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -84,74 +92,44 @@
             {% endfor %}
             <!-- end blog item -->
         </ul>
-        <div class="row">
-            <!-- Contenedor de noticias -->
-            <div class="col-12 mt-4">
-                <ul id="news-list" class="list-unstyled"></ul>
-            </div>
+         <!-- Paginación -->
+    <div class="col-12 mt-4 d-flex justify-content-center">
+        <ul id="pagination" class="pagination pagination-style-01 fs-13 mb-0"
+            data-anime='{ "translate": [0, 0], "opacity": [0,1], "duration": 600, "delay": 100, "staggervalue": 150, "easing": "easeOutQuad" }'>
+            
+            {% if news.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ news.previous_page_number }}">
+                        <i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></span>
+                </li>
+            {% endif %}
 
-            <!-- Paginación -->
-            <div class="col-12 mt-4 d-flex justify-content-center">
-                <ul id="pagination" class="pagination pagination-style-01 fs-13 mb-0"
-                    data-anime='{ "translate": [0, 0], "opacity": [0,1], "duration": 600, "delay": 100, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                </ul>
-            </div>
-        </div>
-        <script>
+            {% for num in news.paginator.page_range %}
+                <li class="page-item {% if news.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num|stringformat:"02d" }}</a>
+                </li>
+            {% endfor %}
+
+            {% if news.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ news.next_page_number }}">
+                        <i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></span>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 
 
-            const newsList = document.getElementById('news-list');
-            const pagination = document.getElementById('pagination');
-
-            function fetchPage(page = 1) {
-                 fetch(`/news/?page=${page}`, {
-                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                })
-                    .then(res => {
-                        return res.json();
-                    })
-                    .then(data => {
-
-
-                        renderPagination(data.total_pages, page);
-                    })
-                    .catch(err => console.error("Error en fetchPage:", err));
-            }
-
-
-            function renderPagination(totalPages, currentPage) {
-                pagination.innerHTML = '';
-                const prev = document.createElement('li');
-                prev.className = 'page-item';
-                prev.innerHTML = `<a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></a>`;
-                if (currentPage > 1) {
-                    prev.querySelector('a').onclick = () => fetchPage(currentPage - 1);
-                } else {
-                    prev.classList.add('disabled');
-                }
-                pagination.appendChild(prev);
-
-                for (let i = 1; i <= totalPages; i++) {
-                    const li = document.createElement('li');
-                    li.className = 'page-item' + (i === currentPage ? ' active' : '');
-                    li.innerHTML = `<a class="page-link" href="#">${String(i).padStart(2, '0')}</a>`;
-                    li.querySelector('a').onclick = () => fetchPage(i);
-                    pagination.appendChild(li);
-                }
-
-                const next = document.createElement('li');
-                next.className = 'page-item';
-                next.innerHTML = `<a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a>`;
-                if (currentPage < totalPages) {
-                    next.querySelector('a').onclick = () => fetchPage(currentPage + 1);
-                } else {
-                    next.classList.add('disabled');
-                }
-                pagination.appendChild(next);
-            }
-
-            fetchPage(); // carga inicial
-        </script>
 
 
     </div>
